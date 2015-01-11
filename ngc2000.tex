@@ -1,0 +1,344 @@
+% Documentation for NGC 2000.0 (Ed. by R.W. Sinnott 1988)
+%
+% Document Number: NSSDC/WDC-A-R&S 89-29
+%
+% Written: December 1989 by Wayne H. Warren
+% TeX Ver: April 1991 by Lee E. Brotzman
+%
+\documentstyle [11pt]{article}
+%
+\newfont{\bfit}{cmbxti10}
+\newcommand{\dmv}{Documentation for the Machine-Readable Version of}
+\newcommand{\cat}{NGC 2000.0}
+\newcommand{\abbr}{7118}
+\newcommand{\prefp}{Sinnott 1988}
+\newcommand{\adc}{Astronomical Data Center}
+\newcommand{\docnum}{NSSDC/WDC-A-R\&S 89-29}
+%
+\begin{document}
+%
+\setcounter{page}{0}
+\thispagestyle{empty}
+\null \vfil \vskip 1in
+\begin{center}
+\begin{tabular}{c}
+      {\LARGE \cat} \\
+      \\
+      {\Large (Edited by R.W. Sinnott 1988)} \\
+      \\
+      Documentation for the Computer-Readable Version \\
+      \\
+      Wayne H. Warren Jr. \\
+      December 1989 \\
+      \\
+      {\small Doc. No. \docnum} \\
+      \\
+      \\
+      {\small National Space Science Data Center (NSSDC)/} \\
+      {\small World Data Center A for Rockets and Satellites (WDC-A-R\&S)} \\
+      {\small National Aeronautics and Space Administration} \\
+      {\small Goddard Space Flight Center} \\
+      {\small Greenbelt, MD 20771}
+\end{tabular}
+\end{center}
+\vfil \null
+\pagebreak
+
+\begin{abstract}
+
+The machine-readable version of the catalog, as it is currently being
+distributed from the \adc, is described. {\em \cat} is a modern version of the
+NGC and IC catalogs compiled by J. L. E. Dreyer in the late nineteenth and early
+twentieth centuries. Errata compiled by Dreyer and by subsequent workers have
+been incorporated into the new version and the object types have been updated
+with information from modern astronomy; the descriptions given are those of
+Dreyer. The order of the new catalog is strictly by right ascension, the NGC and
+IC objects being merged into one machine-readable file.
+
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{Description}
+
+{\em \cat} is a modern compilation of the {\em New General Catalogue of Nebulae
+and Clusters of Stars} (NGC), the {\em Index Catalogue} (IC), and the {\em
+Second Index Catalogue} compiled by J. L. E. Dreyer (1888, 1895, 1908). The new
+compilation of these classical catalogs is intended to meet the needs of
+present-day observers by reporting positions at equinox 2000.0 and by
+incorporating the corrections reported by Dreyer himself and by a host of other
+astronomers who have worked with the data and compiled lists of errata. The
+object types given are those known to modern astronomy.
+
+This document describes the machine-readable version of {\em \cat} as it is
+currently being distributed from the \adc\ (ADC). It includes descriptions of
+the data and format of the computerized version so that users of the file can
+process the data without problems and guesswork. It is, however, not intended to
+replace the source reference, which gives much more complete information
+regarding the compilation of the modern version, sources of the corrections
+incorporated into the file, information about the object descriptions used and
+their abbreviations, nomenclature, and statistics of object locations according
+to constellation.
+
+{\bf All users of the machine version are urged to acquire a copy of the
+published book in order to have complete information at their disposal. However,
+a copy of this document should be transmitted to any recipient of the
+machine-readable catalog.}
+
+{\bfit This catalog is copyrighted by Sky Publishing Corporation, which has
+kindly deposited the machine version in the data centers for permanent archiving
+and dissemination to astronomers for scientific research purposes only. The data
+should not be used for commercial purposes without the explicit permission of
+Sky Publishing Corporation.}
+
+\subsection{Source Reference}
+
+\begin{itemize}
+\item {\em \cat, The Complete New General Catalogue and Index Catalogue of
+Nebulae and Star Clusters by J. L. E. Dreyer}, ed. R. W. Sinnott 1988 (Sky
+Publishing Corporation and Cambridge University Press).
+\end{itemize}
+
+\section{Structure}
+
+\subsection{File Summary}
+
+The machine version of {\em \cat} consists of two files. The first file contains
+only a brief statement concerning the fact that the catalog is copyrighted. The
+second file contains all of the data in the catalog. Table \ref{t:sumtab} gives
+the machine-independent file attributes. All logical records are of fixed
+length, and if the catalog is received on magnetic tape, it will contain blocks
+of fixed length (as noted below) except that the last block of the data file may
+be short. (The text file consists of a single 320-byte block.)
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|c|l|c|c|r|}
+\hline
+\multicolumn{5}{|c|}{\cat\/ (\prefp)}                             \\
+\hline
+     &                               & Record & Record &
+                                     \multicolumn{1}{c|}{Number of} \\
+File & \multicolumn{1}{c|}{Contents} & Format & Length &
+                                     \multicolumn{1}{c|}{Records}   \\
+\hline
+  1  & Text & Fixed & 80  & 4     \\
+  2  & Data & Fixed & 100 & 13226 \\
+\hline
+\end{tabular}
+\caption{Summary Description of Catalog Files}
+\label{t:sumtab}
+\end{table}
+
+The information contained in the above table is sufficient for a user to
+describe the indigenous characteristics of the machine-readable version of
+{\em \cat} to a computer. Information easily varied from installation to
+installation, such as block size (physical record length), blocking factor
+(number of logical records per physical record), total number of blocks,
+density, number of tracks and character coding (ASCII, EBCDIC) for tapes, is not
+included, but should always accompany secondary copies if any are supplied to
+other users or installations.
+
+\subsection{Text File (File 1 of 2)}
+\label{s:cathdi}
+
+This file contains only a brief statement concerning copyright in a Fortran A80
+format. A single line of text with a copyright statement was originally included
+as the first record in the data file, but this was moved to a separate file and
+supplemented with additional text at the ADC.
+
+\subsection{Catalog (File 2 of 2)}
+\label{s:cathdc}
+
+This file contains the complete catalog almost exactly as it appears on pages
+1-241 of the source reference. The file is composed of a single logical record
+per object and the textual fields of the records contain upper and lower case
+characters as in the book.
+
+Table \ref{t:cattab} gives a byte-by-byte description of the contents of the
+data file. A suggested Fortran format specification for reading each data field
+is included and can be modified depending upon individual programming and
+processing requirements (Fortran 77 character string-type formats are used);
+however, caution is advised when substituting format specifications because some
+data fields contain character data and others are blank when data are absent.
+For such numerical fields, primary real format specifications are given to
+indicate decimal-point locations, while alternate A-type formats are specified
+in parentheses. The numerical fields that can be empty are the size and
+magnitude data and these cannot have valid zero values in this catalog, so the
+data can be read with the primary format and tested for zero to detect missing
+data. Default (null) values are always blanks in data fields for which primary
+suggested formats are given as A. Null values are not specified for numerical
+fields that always contain valid data.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|c|c|c|c|l|}
+\hline
+       &       & Suggested & Default &                            \\
+ Bytes & Units &   Format  &  Value  & \multicolumn{1}{c|}{Data}  \\
+\hline
+  1-8  & ---    &   A8     &   ---   & Object identification     \\
+  9    & ---    &   1X     &   ---   & Blank                     \\
+ 10-12 & ---    &   A3     &   ---   & Object type               \\
+ 13    & ---    &   1X     &   ---   & Blank                     \\
+ 14-15 & hours  &   I2     &   ---   & Right ascension           \\
+ 16    & ---    &   1X     &   ---   & Blank                     \\
+ 17-20 & min    &   F4.1   &   ---   & R.A.                      \\
+ 21-22 & ---    &   2X     &   ---   & Blank                     \\
+ 23    & ---    &   A1     &   ---   & Sign of declination       \\
+ 24-25 & deg    &   I2     &   ---   & Declination               \\
+ 26    & ---    &   1X     &   ---   & Blank                     \\
+ 27-28 & arcmin &   I2     &   ---   & Dec.                      \\
+ 29    & ---    &   1X     &   ---   & Blank                     \\
+ 30    & ---    &   A1     &   ---   & Modern data source code   \\
+ 31-32 & ---    &   2X     &   ---   & Blank                     \\
+ 33-35 & ---    &   A3     &   ---   & Constellation             \\
+ 36    & ---    &   A1     &   ---   & Upper limit character ($<$) \\
+ 37-41 & arcmin & F5.1 (A5)&  blank  & Object size               \\
+ 42-43 & ---    &   2X     &   ---   & Blank                     \\
+ 44-47 & mag    & F4.1 (A4)&  blank  & Magnitude                 \\
+ 48    & ---    &   A1     &   ---   & Magnitude code            \\
+ 49    & ---    &   1X     &   ---   & Blank                     \\
+ 50-99 & ---    &   A50    &   ---   & Description               \\
+ 100   & ---    &   1X     &   ---   & Blank                     \\
+\hline
+\end{tabular}
+\caption{Data File Record Format}
+\label{t:cattab}
+\end{table}
+
+\begin{description}%{23ex}
+
+\item[Object ID] Object number in the form ``NGC nnnn'' for NGC objects, and
+``IC nnnn'' for IC objects, where ``nnnn'' indicates the sequential number of
+the object.
+
+\item[Object type] An object classification according to modern astronomy. The
+field is coded according to the following abbreviations:
+
+\begin{description}%{7ex}
+\item[Gx] Galaxy
+\item[OC] Open star cluster
+\item[Gb] Globular star cluster, usually in the Milky Way Galaxy
+\item[Nb] Bright emission or reflection nebula
+\item[Pl] Planetary nebula
+\item[C+N] Cluster associated with nebulosity
+\item[Ast] Asterism or group of a few stars
+\item[Kt] Knot or nebulous region in an external galaxy
+\item[***] Triple star
+\item[D*] Double star
+\item[*] Single star
+\item[?] Uncertain type or may not exist
+\item[blank] Unidentified at the place given, or type unknown
+\item[--] Object called nonexistent in the RNGC (Sulentic and Tifft 1973)
+\item[PD] Photographic plate defect
+\end{description}
+
+\item[Equatorial coordinates] Equinox 2000.
+
+\item[Data source code] A letter code to indicate the source of modern data
+about the object. These citations will be found in the source reference, pages
+XXIII-XXIV, along with additional information. ``Modern'' data may include type,
+position, size, and magnitude, but not descriptions, which are always those of
+Dreyer.
+
+\item[Constellation] Constellation in which the object is located.
+
+\item[Upper limit character] The character ``$<$'' is present if object size is
+an upper limit.
+
+\item[Object size] Angular size, as measured along the greatest dimension. The
+precision varies, so byte 41 can be blank, as can the whole field if size is not
+reported.
+
+\item[Magnitude] Integrated (total) magnitude of the type indicated by the code
+in the following field. The precision varies as in the size field.
+
+\item[Magnitude code] Blank if the integrated magnitude is visual, ``p'' if it
+is a photographic (blue) magnitude.
+
+\item[Description] A description of the object, as given by Dreyer or corrected
+by him, in a coded or abbreviated form. For an NGC object, the description is
+always a visual impression, while the IC descriptions are often based on
+photographic appearance. A full list of the abbreviations will be found in Table
+II of the introduction to the published catalog (the source reference).
+
+\end{description}
+
+\section{History}
+
+\subsection{Remarks and Modifications}
+
+It is important, even for users of the machine-readable catalog and this
+documentation, to also have a copy of the published book. In addition to the
+tables and reference sources mentioned in this document, the book provides an
+introductory section with a brief history of the NGC and IC catalogs, a count of
+objects by constellation, information on Dreyer's descriptions, a table cross
+index of Messier and NGC/IC designations, and a table of common names for NGC
+objects. The book also contains a table of right ascensions for NGC and IC
+objects.
+
+A magnetic tape containing \cat\ was received from William E. Shawcross of Sky
+Publishing Corporation on August 14, 1989. According to Mr. Shawcross, the file
+supplied to the ADC was an unmodified version of the one used to produce the
+book, and it still contained the \TeX\ commands employed to produce the special
+symbols present in the printed version. As received, the file also contained a
+single copyright text record at its beginning. The text record was removed to an
+added first file in the archived version and supplemented with a small amount of
+additional information. The \TeX\ in the data file was replaced by standard
+characters to represent the information. Special symbols, such as $\Delta$,
+$\bigcirc$, etc., were changed to their spelled-out equivalents.
+
+The size field was modified to add decimal points to integer numbers and to
+align all values properly so that the field can be processed with a single
+format specification. The magnitude field was modified by moving the ``p'' code
+for photographic magnitude to its own byte in order to remove it from the
+numerical field. Decimal points were added to all integer numbers in this field
+also.
+
+The catalog data file was run through the ADC General Verification Program,
+which checks data ranges and for various other problems that can be detected in
+a systematic way.
+
+\section{Acknowledgments and References}
+
+\subsection{Acknowledgments}
+
+Appreciation is expressed to William E. Shawcross for responding to a request
+from the ADC to make {\em \cat} available to the scientific community in
+machine-readable form. Mr. Shawcross also arranged for a copy of the
+machine-readable \TeX\ file to be created for deposit in the archives of the
+data centers. I am grateful to both Mr. Shawcross and to Roger W. Sinnott for
+reviewing a draft copy of this document and making comments. The comments
+resulted in the finding and elimination of a few \TeX\ symbols that were missed
+during the initial work.
+
+\subsection{References}
+
+\begin{itemize}
+
+\item Dreyer, J. L. E. 1888, {\em New General Catalogue of Nebulae and Clusters
+of Stars}, {\em Mem. Roy. Astron. Soc.} {\bf 49}, Part I (reprinted 1953,
+London: Royal Astronomical Society).
+
+\item Dreyer, J. L. E. 1895, {\em Index Catalogue of Nebulae Found in the Years
+1888 to 1894, with Notes and Corrections to the New General Catalogue}, {\em
+Mem. Roy. Astron. Soc.} {\bf 51}, 185 (reprinted 1953, London: Royal
+Astronomical Society).
+
+\item Dreyer, J. L. E. 1908, {\em Second Index Catalogue of Nebulae Found in the
+Years 1895 to 1907; with Notes and Corrections to the New General Catalogue and
+to the Index Catalogue for 1888 to 1894}, {\em Mem. Roy. Astron. Soc.} {\bf 59},
+Part 2, 105 (reprinted 1953, London: Royal Astronomical Society).
+
+\item {\em \cat, The Complete New General Catalogue and Index Catalogue of
+Nebulae and Star Clusters by J. L. E. Dreyer}, ed. R. W. Sinnott 1988 (Sky
+Publishing Corporation and Cambridge University Press).
+
+\item Sulentic, J. W. and Tifft, W. G. 1973, {\em The Revised New General
+Catalogue of Nonstellar Astronomical Objects} (Tucson: The University of Arizona
+Press).
+
+\end{itemize}
+
+\end{document}
